@@ -23,7 +23,7 @@ A decentralized, anonymous storytelling platform designed for survivors, witness
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/the-crossing-wind/web
+git clone https://github.com/the-passing-wind/web
 cd web
 npm install
 ```
