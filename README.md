@@ -1,4 +1,4 @@
-# Wind & Truth Anonymous Archive
+# The Pasing Wind
 
 A decentralized, anonymous storytelling platform designed for survivors, witnesses, and allies. Users can release their "truths to the wind" anonymously, and others can witness or respond to these stories.
 
@@ -23,8 +23,8 @@ A decentralized, anonymous storytelling platform designed for survivors, witness
 ### 1. Clone & Install
 
 ```bash
-git clone <your-repo-url>
-cd wind-truth-archive
+git clone https://github.com/the-crossing-wind/web
+cd web
 npm install
 ```
 
