@@ -1,11 +1,12 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { collection, query, orderBy, onSnapshot, limit, serverTimestamp, addDoc, doc, getDocFromServer } from 'firebase/firestore';
+import { collection, query, orderBy, onSnapshot, limit, serverTimestamp, addDoc, doc, getDocFromServer, where } from 'firebase/firestore';
 import { db, handleFirestoreError, OperationType } from '@/lib/firebase';
 import { motion, AnimatePresence } from 'motion/react';
 import { MessageSquare, Quote, User as UserIcon, Send, Sparkles, AlertCircle, Heart, ArrowLeft } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
+import { zhCN } from 'date-fns/locale';
 import { useLanguage } from '@/lib/i18n';
 import CommentSection from './CommentSection';
 import Link from 'next/link';
@@ -29,7 +30,7 @@ export default function StoryFeed({
   truncate?: boolean;
   interactive?: boolean;
 }) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
@@ -44,6 +45,7 @@ export default function StoryFeed({
   useEffect(() => {
     const q = query(
       collection(db, 'stories'),
+      where('isApproved', '==', true),
       orderBy('createdAt', 'desc'),
       limit(maxStories || 50)
     );
@@ -77,7 +79,7 @@ export default function StoryFeed({
       setNewStory({ content: '', alias: '', category: 'Experience' });
       setShowForm(false);
     } catch (err) {
-      setError("Failed to share story. Please check your connection.");
+      setError(t.common.submitError);
       console.error(err);
     } finally {
       setSubmitting(false);
@@ -235,9 +237,9 @@ export default function StoryFeed({
                     <UserIcon className="w-5 h-5 text-text-dim opacity-50" />
                   </div>
                   <div>
-                    <h3 className="font-bold text-sm text-text-main">{story.alias || "Anonymous Agent"}</h3>
+                    <h3 className="font-bold text-sm text-text-main">{story.alias || t.common.anonymousAgent}</h3>
                     <p className="text-[10px] font-mono text-text-dim uppercase tracking-tighter">
-                      {story.createdAt?.toDate ? formatDistanceToNow(story.createdAt.toDate(), { addSuffix: true }) : 'just now'}
+                      {story.createdAt?.toDate ? formatDistanceToNow(story.createdAt.toDate(), { addSuffix: true, locale: language === 'zh' ? zhCN : undefined }) : t.common.justNow}
                     </p>
                   </div>
                 </div>

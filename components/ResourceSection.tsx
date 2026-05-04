@@ -90,7 +90,7 @@ export default function ResourceSection() {
                 "{resource.description}"
               </p>
               <div className="mt-8 inline-block text-[10px] font-black tracking-widest uppercase py-1 px-4 border border-border-main text-text-dim group-hover:border-brand group-hover:text-brand rounded-full transition-colors">
-                {resource.category}
+              {t.common.categories[resource.category]}
               </div>
             </motion.a>
           ))}

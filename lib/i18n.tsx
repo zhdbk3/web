@@ -42,6 +42,9 @@ const translations: Record<string, any> = {
       viewAll: 'Discover All Currents',
       backToHome: 'Back to Home',
       backToArchive: 'Back to Archive',
+      archiveTitle: 'The Full',
+      archiveTitleAccent: 'Archive',
+      archiveSubtitle: 'Every ripple, every gust, every voice that has passed through here.',
       readFull: 'Read full story',
       viewDetails: 'View Story Details',
       comments: {
@@ -93,6 +96,18 @@ const translations: Record<string, any> = {
       contact: 'Reach Out',
       emergency: 'Urgent Shelter',
       copyright: 'For the Free & The Brave · 2026',
+    },
+    common: {
+      anonymousAgent: 'Anonymous Agent',
+      justNow: 'just now',
+      submitError: 'Failed to share story. Please check your connection.',
+      toggleTheme: 'Toggle Theme',
+      categories: {
+        Legal: 'Legal',
+        Healthcare: 'Healthcare',
+        Community: 'Community',
+        Safety: 'Safety',
+      }
     }
   },
   zh: {
@@ -132,6 +147,9 @@ const translations: Record<string, any> = {
       viewAll: '探索所有风潮',
       backToHome: '返回主页',
       backToArchive: '返回存档',
+      archiveTitle: '完整',
+      archiveTitleAccent: '存档',
+      archiveSubtitle: '每一道涟漪，每一阵风，每一个曾在此留下声音的人。',
       readFull: '阅读全文',
       viewDetails: '查看详情',
       comments: {
@@ -183,6 +201,18 @@ const translations: Record<string, any> = {
       contact: '联系我们',
       emergency: '紧急求助',
       copyright: '致自由与勇敢的你 · 2026',
+    },
+    common: {
+      anonymousAgent: '匿名用户',
+      justNow: '刚刚',
+      submitError: '提交失败，请检查您的网络连接。',
+      toggleTheme: '切换主题',
+      categories: {
+        Legal: '法律',
+        Healthcare: '医疗',
+        Community: '社区',
+        Safety: '安全',
+      }
     }
   }
 };

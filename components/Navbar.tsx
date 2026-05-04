@@ -61,7 +61,7 @@ export default function Navbar() {
           <button 
             onClick={toggleTheme}
             className="w-9 h-9 sm:w-10 sm:h-10 flex items-center justify-center border border-border-main rounded-full text-text-main hover:bg-bg-surface transition-all"
-            aria-label="Toggle Theme"
+            aria-label={t.common.toggleTheme}
           >
             {theme === 'light' ? <Moon className="w-4 h-4" /> : <Sun className="w-4 h-4" />}
           </button>

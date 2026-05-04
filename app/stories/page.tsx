@@ -21,10 +21,10 @@ export default function StoriesArchive() {
             {t.stories.backToHome}
           </Link>
           <h1 className="text-5xl md:text-7xl font-serif text-text-main mb-4">
-            The Full <span className="text-brand italic">Archive</span>
+            {t.stories.archiveTitle} <span className="text-brand italic">{t.stories.archiveTitleAccent}</span>
           </h1>
           <p className="text-text-dim max-w-2xl font-serif text-xl italic">
-            Every ripple, every gust, every voice that has passed through here.
+            {t.stories.archiveSubtitle}
           </p>
         </div>
       </div>

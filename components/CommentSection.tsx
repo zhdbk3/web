@@ -12,6 +12,7 @@ import {
   Timestamp 
 } from 'firebase/firestore';
 import { formatDistanceToNow } from 'date-fns';
+import { zhCN } from 'date-fns/locale';
 import { useLanguage } from '@/lib/i18n';
 import { MessageSquare, Send, User } from 'lucide-react';
 
@@ -27,7 +28,7 @@ interface CommentSectionProps {
 }
 
 export default function CommentSection({ storyId }: CommentSectionProps) {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const [comments, setComments] = useState<Comment[]>([]);
   const [newComment, setNewComment] = useState('');
   const [alias, setAlias] = useState('');
@@ -131,7 +132,7 @@ export default function CommentSection({ storyId }: CommentSectionProps) {
                       {comment.alias || t.stories.comments.anonymous}
                     </span>
                     <span className="text-[9px] font-mono text-text-dim uppercase">
-                      {comment.createdAt?.toDate ? formatDistanceToNow(comment.createdAt.toDate(), { addSuffix: true }) : '...'}
+                      {comment.createdAt?.toDate ? formatDistanceToNow(comment.createdAt.toDate(), { addSuffix: true, locale: language === 'zh' ? zhCN : undefined }) : '...'}
                     </span>
                   </div>
                   <p className="text-xs text-text-main opacity-80 leading-relaxed bg-bg-surface p-3 rounded-2xl rounded-tl-none">

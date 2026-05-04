@@ -51,8 +51,9 @@ service cloud.firestore {
     }
 
     match /stories/{storyId} {
-      // Stories are public for reading
-      allow get, list: if true;
+      // Stories are public for reading only if approved
+      allow get: if resource.data.isApproved == true;
+      allow list: if request.query.filters.isApproved == true;
 
       // Anyone can submit a story anonymously
       allow create: if isValidStory(incoming()) && incoming().get('isApproved', false) == false;
