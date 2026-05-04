@@ -1,0 +1,96 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Default deny
+    match /{document=**} {
+      allow read, write: if false;
+    }
+
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isEmailVerified() {
+      return isSignedIn() && request.auth.token.email_verified == true;
+    }
+
+    function isAdmin() {
+      // REPLACE_WITH_YOUR_ADMIN_EMAIL: The email address that should have admin privileges
+      return isEmailVerified() && request.auth.token.email == 'YOUR_ADMIN_EMAIL_HERE';
+    }
+
+    function isValidId(id) {
+      return id is string && id.size() <= 128 && id.matches('^[a-zA-Z0-9_\\-]+$');
+    }
+
+    function incoming() {
+      return request.resource.data;
+    }
+
+    function existing() {
+      return resource.data;
+    }
+
+    // STORY VALIDATION
+    function isValidStory(data) {
+      return data.keys().hasAll(['content', 'category', 'createdAt']) &&
+             data.keys().size() <= 6 && // content, category, createdAt, alias, isApproved, tags
+             data.content is string && data.content.size() > 0 && data.content.size() <= 5000 &&
+             data.category in ['Experience', 'Encouragement', 'Observation'] &&
+             data.createdAt == request.time &&
+             (data.get('alias', '') is string && data.get('alias', '').size() <= 100);
+    }
+
+    function isValidComment(data) {
+      return data.keys().hasAll(['content', 'createdAt']) &&
+             data.keys().size() <= 3 && // content, createdAt, alias
+             data.content is string && data.content.size() > 0 && data.content.size() <= 1000 &&
+             data.createdAt == request.time &&
+             (data.get('alias', '') is string && data.get('alias', '').size() <= 100);
+    }
+
+    match /stories/{storyId} {
+      // Stories are public for reading
+      allow get, list: if true;
+
+      // Anyone can submit a story anonymously
+      allow create: if isValidStory(incoming()) && (incoming().get('isApproved', true) == true);
+
+      // Only admin can delete or update
+      allow update, delete: if isAdmin();
+
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if isValidComment(incoming());
+        allow update, delete: if isAdmin();
+      }
+    }
+
+    // RESOURCES VALIDATION
+    function isValidResource(data) {
+      return data.keys().hasAll(['title', 'url', 'category']) &&
+             data.title is string && data.title.size() <= 200 &&
+             data.url is string && data.url.size() <= 500 &&
+             data.category in ['Legal', 'Healthcare', 'Community', 'Safety'];
+    }
+
+    match /resources/{resourceId} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidResource(incoming());
+    }
+
+    // ALLY GUIDELINES VALIDATION
+    function isValidGuideline(data) {
+      return data.keys().hasAll(['title', 'content', 'order']) &&
+             data.title is string && data.title.size() <= 200 &&
+             data.content is string && data.content.size() <= 10000 &&
+             data.order is number;
+    }
+
+    match /ally_guidelines/{guidelineId} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidGuideline(incoming());
+    }
+  }
+}

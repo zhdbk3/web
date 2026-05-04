@@ -1,0 +1,69 @@
+{
+  "entities": {
+    "Story": {
+      "title": "Story",
+      "description": "An anonymous experience shared by a member of the trans community.",
+      "type": "object",
+      "properties": {
+        "content": { "type": "string", "description": "The full text of the story." },
+        "alias": { "type": "string", "description": "An optional anonymous alias for the author." },
+        "category": { "type": "string", "enum": ["Experience", "Encouragement", "Observation"], "description": "The nature of the post." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp of submission." },
+        "isApproved": { "type": "boolean", "description": "Whether the story has been reviewed for safety (defaults to true for this demo)." }
+      },
+      "required": ["content", "category", "createdAt"]
+    },
+    "Resource": {
+      "title": "Resource",
+      "description": "Handy links and organizations supporting the trans community.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "description": { "type": "string" },
+        "url": { "type": "string" },
+        "category": { "type": "string", "enum": ["Legal", "Healthcare", "Community", "Safety"] }
+      },
+      "required": ["title", "url", "category"]
+    },
+    "AllyGuideline": {
+      "title": "Ally Guideline",
+      "description": "Educational content for allies to better support trans individuals.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "content": { "type": "string", "description": "Markdown content explaining the guideline." },
+        "order": { "type": "number", "description": "Display order." }
+      },
+      "required": ["title", "content", "order"]
+    },
+    "Comment": {
+      "title": "Comment",
+      "description": "An anonymous comment on a story.",
+      "type": "object",
+      "properties": {
+        "content": { "type": "string" },
+        "alias": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["content", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/stories": {
+      "schema": "Story",
+      "description": "Public anonymous stories."
+    },
+    "/stories/{storyId}/comments": {
+      "schema": "Comment",
+      "description": "Comments on a specific story."
+    },
+    "/resources": {
+      "schema": "Resource",
+      "description": "Educational and support resources."
+    },
+    "/ally_guidelines": {
+      "schema": "AllyGuideline",
+      "description": "Instructions for allies."
+    }
+  }
+}
