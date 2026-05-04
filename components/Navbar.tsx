@@ -77,7 +77,7 @@ export default function Navbar() {
           {user ? (
             <div className="hidden sm:flex items-center gap-3 sm:gap-4">
               <span className="text-xs font-mono text-text-dim hidden xl:block">
-                {user.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL ? 'ADMIN' : user.email?.split('@')[0].toUpperCase()}
+                {user.email === 'idadwind@gmail.com' ? 'ADMIN' : user.email?.split('@')[0].toUpperCase()}
               </span>
               <button 
                 onClick={handleLogout}

@@ -17,7 +17,7 @@ service cloud.firestore {
 
     function isAdmin() {
       // REPLACE_WITH_YOUR_ADMIN_EMAIL: The email address that should have admin privileges
-      return isEmailVerified() && request.auth.token.email == 'YOUR_ADMIN_EMAIL_HERE';
+      return isEmailVerified() && request.auth.token.email == 'idadwind@gmail.com';
     }
 
     function isValidId(id) {
@@ -55,7 +55,7 @@ service cloud.firestore {
       allow get, list: if true;
 
       // Anyone can submit a story anonymously
-      allow create: if isValidStory(incoming()) && (incoming().get('isApproved', true) == true);
+      allow create: if isValidStory(incoming()) && incoming().get('isApproved', false) == false;
 
       // Only admin can delete or update
       allow update, delete: if isAdmin();
