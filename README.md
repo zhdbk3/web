@@ -1,4 +1,4 @@
-# The Pasing Wind
+# The Passing Wind
 
 A decentralized, anonymous storytelling platform designed for survivors, witnesses, and allies. Users can release their "truths to the wind" anonymously, and others can witness or respond to these stories.
 
@@ -23,7 +23,7 @@ A decentralized, anonymous storytelling platform designed for survivors, witness
 ### 1. Clone & Install
 
 ```bash
-git clone https://github.com/the-crossing-wind/web
+git clone https://github.com/the-passing-wind/web
 cd web
 npm install
 ```
