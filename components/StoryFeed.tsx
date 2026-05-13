@@ -115,7 +115,7 @@ export default function StoryFeed({
     if (truncate && isLong) {
       return (
         <>
-          "{content.substring(0, 300)}..."
+          &quot;{content.substring(0, 300)}...&quot;
           <Link
             href={`/stories/${id}`}
             className="block mt-4 text-sm font-bold text-brand hover:underline"

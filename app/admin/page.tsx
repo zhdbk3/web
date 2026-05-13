@@ -115,9 +115,9 @@ export default function AdminPage() {
                 </div>
 
                 <p className="font-serif text-lg leading-relaxed text-text-main opacity-80 italic mb-6 whitespace-pre-wrap">
-                  "
+                  &quot;
                   {story.content.length > 300 ? story.content.slice(0, 300) + "..." : story.content}
-                  "
+                  &quot;
                 </p>
 
                 <div className="flex gap-3">

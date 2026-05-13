@@ -94,7 +94,7 @@ export default function ResourceSection() {
               </div>
               <h3 className="text-xl font-bold mb-2 text-text-main">{resource.title}</h3>
               <p className="text-sm text-text-dim leading-relaxed font-serif italic text-lg line-clamp-3">
-                "{resource.description}"
+                &quot;{resource.description}&quot;
               </p>
               <div className="mt-8 inline-block text-[10px] font-black tracking-widest uppercase py-1 px-4 border border-border-main text-text-dim group-hover:border-brand group-hover:text-brand rounded-full transition-colors">
                 {t.common.categories[resource.category]}

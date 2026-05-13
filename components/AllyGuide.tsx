@@ -43,7 +43,7 @@ export default function AllyGuide() {
                       <CheckCircle2 className="w-4 h-4 text-brand-accent opacity-0 group-hover:opacity-100 transition-opacity" />
                     </h3>
                     <p className="text-text-dim leading-relaxed font-serif text-lg italic">
-                      "{guide.content}"
+                      &quot;{guide.content}&quot;
                     </p>
                   </div>
                 </div>

@@ -106,7 +106,7 @@ export default function StoryDetail() {
             </div>
 
             <div className="font-serif text-2xl sm:text-3xl leading-relaxed text-text-main opacity-90 whitespace-pre-wrap italic mb-12">
-              "{story.content}"
+              &quot;{story.content}&quot;
             </div>
 
             <div className="pt-8 border-t border-border-main">
